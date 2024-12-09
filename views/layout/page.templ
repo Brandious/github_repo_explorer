@@ -1,0 +1,32 @@
+package layout
+
+templ Page(nav bool, isAuthenticated bool) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>Github repo explorer</title>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="/public/styles.css"/>
+			<script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
+			<!-- Optional: Add fonts -->
+			<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+		</head>
+		<body class="bg-gray-50 min-h-screen">
+			if nav {
+				<nav class="bg-[#1a1a1a] text-primary-100 p-4 shadow-md">
+					<div class="max-w-7xl mx-auto flex items-center justify-between">
+						<a href="/" class="text-xl font-heading font-bold">GitHub Explorer</a>
+						<div class="space-x-6">
+							<a href="/" class="hover:text-primary-300 transition-colors">Login</a>
+							<a href="/repos" class="hover:text-primary-300 transition-colors">Repos</a>
+						</div>
+					</div>
+				</nav>
+			}
+			<main class="w-full">
+				{ children... }
+			</main>
+		</body>
+	</html>
+}
