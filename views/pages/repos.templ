@@ -1,6 +1,9 @@
 package pages
 
-import "github.com/brandious/github_repo_explorer/views/layout"
+import (
+	"github.com/brandious/github_repo_explorer/views/components"
+	"github.com/brandious/github_repo_explorer/views/layout"
+)
 
 templ Repos(nav bool, isAuthenticated bool) {
 	@layout.Page(nav, isAuthenticated) {
@@ -32,7 +35,7 @@ templ Repos(nav bool, isAuthenticated bool) {
 						</button>
 					</div>
 					<div id="results" class="mt-8 space-y-4">
-						<!-- Results will be loaded here -->
+						@components.SearchResults(nil)
 					</div>
 				</div>
 			</div>

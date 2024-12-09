@@ -6,8 +6,10 @@ import (
 	"net/http"
 
 	"github.com/brandious/github_repo_explorer/cmd/config"
+	"github.com/brandious/github_repo_explorer/views/components"
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-github/v60/github"
+	"golang.org/x/oauth2"
 )
 
 func (app *Config) LoginHandler() gin.HandlerFunc {
@@ -78,10 +80,37 @@ func (app *Config) searchReposHandler() gin.HandlerFunc {
 			return
 		}
 
-		// Get GitHub client from your OAuth setup
-		// client := github.NewClient(...)
+		// Get GitHub token from cookie
+		token, err := c.Cookie("github_token")
+		if err != nil {
+			c.String(http.StatusUnauthorized, "Not authenticated")
+			return
+		}
 
-		// For now, just return the search query
-		c.String(http.StatusOK, "Searching for: "+query)
+		// Create GitHub client
+		ts := oauth2.StaticTokenSource(
+			&oauth2.Token{AccessToken: token},
+		)
+		tc := oauth2.NewClient(c, ts)
+		client := github.NewClient(tc)
+
+		// Search options
+		opts := &github.SearchOptions{
+			Sort:  "stars",
+			Order: "desc",
+			ListOptions: github.ListOptions{
+				PerPage: 10,
+			},
+		}
+
+		// Perform search
+		result, _, err := client.Search.Repositories(c, query, opts)
+		if err != nil {
+			c.String(http.StatusInternalServerError, "Failed to search repositories")
+			return
+		}
+
+		// Render results
+		render(c, http.StatusOK, components.SearchResults(result.Repositories))
 	}
 }

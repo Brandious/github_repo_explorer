@@ -34,7 +34,7 @@ func Page(nav bool, isAuthenticated bool) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if nav {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav class=\"bg-[#1a1a1a] text-primary-100 p-4 shadow-md\"><div class=\"max-w-7xl mx-auto flex items-center justify-between\"><a href=\"/\" class=\"text-xl font-heading font-bold\">GitHub Explorer</a><div class=\"space-x-6\"><a href=\"/\" class=\"hover:text-primary-300 transition-colors\">Login</a> <a href=\"/repos\" class=\"hover:text-primary-300 transition-colors\">Repos</a></div></div></nav>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav class=\"bg-[#1a1a1a] text-primary-100 p-4 shadow-md\"><div class=\"max-w-7xl mx-auto flex items-center justify-between\"><a href=\"/repos\" class=\"text-xl font-heading font-bold\">GitHub Explorer</a><div class=\"space-x-6\"><a href=\"/repos\" class=\"hover:text-primary-300 transition-colors\">Repos</a></div></div></nav>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

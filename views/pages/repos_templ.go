@@ -8,7 +8,10 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/brandious/github_repo_explorer/views/layout"
+import (
+	"github.com/brandious/github_repo_explorer/views/components"
+	"github.com/brandious/github_repo_explorer/views/layout"
+)
 
 func Repos(nav bool, isAuthenticated bool) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -43,7 +46,15 @@ func Repos(nav bool, isAuthenticated bool) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-screen bg-[#1a1a1a] text-dark-text-primary\"><div class=\"max-w-2xl mx-auto p-6\"><h1 class=\"text-4xl font-heading font-bold text-center mb-8 bg-gradient-to-r from-dark-gradient-start to-dark-gradient-end bg-clip-text text-transparent\">Search GitHub Repositories</h1><div class=\"bg-[#1a1a1a]rounded-lg p-6\"><div class=\"flex gap-4\"><input type=\"text\" name=\"repo\" id=\"repo-search\" placeholder=\"Enter repository name...\" class=\"flex-1 bg-dark-surface border-dark-border text-dark-text-primary placeholder-dark-text-secondary rounded-md focus:ring-primary-500 focus:border-primary-500\" hx-trigger=\"keyup[keyCode==13]\" hx-get=\"/search-repos\" hx-target=\"#results\"> <button class=\"bg-primary-500 hover:bg-primary-600 text-dark-text-primary font-bold py-2 px-6 rounded-md transition-all duration-300 hover:shadow-neon\" hx-get=\"/search-repos\" hx-trigger=\"click\" hx-target=\"#results\" hx-include=\"#repo-search\">Search</button></div><div id=\"results\" class=\"mt-8 space-y-4\"><!-- Results will be loaded here --></div></div></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-screen bg-[#1a1a1a] text-dark-text-primary\"><div class=\"max-w-2xl mx-auto p-6\"><h1 class=\"text-4xl font-heading font-bold text-center mb-8 bg-gradient-to-r from-dark-gradient-start to-dark-gradient-end bg-clip-text text-transparent\">Search GitHub Repositories</h1><div class=\"bg-[#1a1a1a]rounded-lg p-6\"><div class=\"flex gap-4\"><input type=\"text\" name=\"repo\" id=\"repo-search\" placeholder=\"Enter repository name...\" class=\"flex-1 bg-dark-surface border-dark-border text-dark-text-primary placeholder-dark-text-secondary rounded-md focus:ring-primary-500 focus:border-primary-500\" hx-trigger=\"keyup[keyCode==13]\" hx-get=\"/search-repos\" hx-target=\"#results\"> <button class=\"bg-primary-500 hover:bg-primary-600 text-dark-text-primary font-bold py-2 px-6 rounded-md transition-all duration-300 hover:shadow-neon\" hx-get=\"/search-repos\" hx-trigger=\"click\" hx-target=\"#results\" hx-include=\"#repo-search\">Search</button></div><div id=\"results\" class=\"mt-8 space-y-4\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.SearchResults(nil).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
